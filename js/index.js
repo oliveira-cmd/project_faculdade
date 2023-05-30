@@ -5,6 +5,9 @@ function generateCurriculum() {
   const whatsapp = document.getElementById('whatsapp').value;
   const github = document.getElementById('github').value;
   const about_me = document.getElementById('bio').value;
+  const popup = document.getElementById('popup');
+  const popup_title = document.getElementById('popup_title');
+  const popup_message = document.getElementById('content_popup');
   const url = `https://api.github.com/users/${github}/repos`;
   const image_user = `https://github.com/${github}.png`;
   const curriculumDiv = document.querySelector('body');
@@ -58,8 +61,17 @@ function generateCurriculum() {
           </style>
         `;
       } else {
-        curriculumDiv.innerHTML = `O usuario ${github} não existe no github, atualize a página e tente novamente`;
+
+        popup_title.innerHTML = `Erro no usuario ${github}!`;
+        popup_message.innerHTML = `O usuario ${github} não existe no github, verifique os novamente`;
+        popup.classList.remove('hidden');
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
     })
     .catch(error => console.error(error));
 }
+
+
